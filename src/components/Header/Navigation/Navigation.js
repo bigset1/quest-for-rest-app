@@ -1,12 +1,14 @@
 import React, {PropTypes} from 'react';
-import {Nav} from 'react-bootstrap';
+import {Nav, NavItem} from 'react-bootstrap';
 import Link from 'react-router/lib/Link';
 
 function Navigation({className}) {
   return (
-    <Nav bsStyle="pills" activeKey={1}>
-      <Link to={"/profile"}>Profile</Link>
-    </Nav>
+    <ul className="nav nav-pills">
+      <li>
+        <Link to={"/profile"}> test </Link>
+      </li>
+    </ul>
   );
 }
 
@@ -14,4 +16,4 @@ Navigation.propTypes = {
   className: PropTypes.string,
 };
 
-export default withStyles(s)(Navigation);
+export default Navigation;
