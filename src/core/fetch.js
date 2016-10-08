@@ -1,4 +1,4 @@
-import superAgent from 'superagent/lib/client';
+import superAgent from 'superagent';
 import {restUrl} from '../config';
 
 export default {

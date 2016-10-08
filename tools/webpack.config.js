@@ -17,6 +17,7 @@ const AUTOPREFIXER_BROWSERS = [
 ];
 const GLOBALS = {
   'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
+  "global.GENTLY": false,
   __DEV__: DEBUG,
 };
 
@@ -192,7 +193,6 @@ const clientConfig = extend(true, {}, config, {
     new webpack.optimize.OccurrenceOrderPlugin(true),
 
     ...DEBUG ? [] : [
-
       // Search for equal or similar files and deduplicate them in the output
       // https://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
       new webpack.optimize.DedupePlugin(),
@@ -239,7 +239,7 @@ const serverConfig = extend(true, {}, config, {
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
     new webpack.DefinePlugin({...GLOBALS, 'process.env.BROWSER': false}),
-    new ExtractTextPlugin( "public/styles.css" )
+    new ExtractTextPlugin("public/styles.css")
   ],
 
   node: {
@@ -248,7 +248,7 @@ const serverConfig = extend(true, {}, config, {
     process: false,
     Buffer: false,
     __filename: false,
-    __dirname: false,
+    __dirname: true,
   },
 
   devtool: 'source-map',

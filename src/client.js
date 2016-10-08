@@ -8,15 +8,15 @@ import Router from 'react-router/lib/Router';
 import routes from './routes';
 import browserHistory  from 'react-router/lib/browserHistory';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import questsApp from './core/reducers';
-
 injectTapEventPlugin();
 // Make taps on links and buttons work fast on mobiles
 FastClick.attach(document.body);
 
 const container = document.getElementById('app');
-let store = createStore(questsApp);
+let store = createStore(questsApp, applyMiddleware(thunk));
 
 try {
   ReactDOM.render(

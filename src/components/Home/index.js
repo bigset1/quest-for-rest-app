@@ -45,7 +45,7 @@ const QuestCard = ()=> {
 class Home extends React.Component {
   componentDidMount() {
     let {dispatch} =this.props;
-    //dispatch(fetchQuests());
+    dispatch(fetchQuests());
   }
 
   render() {
