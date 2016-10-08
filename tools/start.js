@@ -25,7 +25,7 @@ const DEBUG = !process.argv.includes('--release');
  */
 async function start() {
   await run(clean);
-  await run(copy.bind(undefined, { watch: true }));
+  await run(copy.bind(undefined, {watch: true}));
   await new Promise(resolve => {
     // Patch the client-side bundle configurations
     // to enable Hot Module Replacement (HMR) and React Transform
@@ -33,7 +33,9 @@ async function start() {
       /* eslint-disable no-param-reassign */
       config.entry = ['webpack-hot-middleware/client'].concat(config.entry);
       config.output.filename = config.output.filename.replace('[chunkhash]', '[hash]');
-      config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash]', '[hash]');
+      if (config.output.chunkFilename) {
+        config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash]', '[hash]');
+      }
       config.plugins.push(new webpack.HotModuleReplacementPlugin());
       config.plugins.push(new webpack.NoErrorsPlugin());
       config
@@ -42,9 +44,6 @@ async function start() {
         .filter(x => x.loader === 'babel-loader')
         .forEach(x => (x.query = {
           ...x.query,
-
-          // Wraps all React components into arbitrary transforms
-          // https://github.com/gaearon/babel-plugin-react-transform
           plugins: [
             ...(x.query ? x.query.plugins : []),
             ['react-transform', {
@@ -78,9 +77,7 @@ async function start() {
       // For other settings see
       // https://webpack.github.io/docs/webpack-dev-middleware
     });
-    const hotMiddlewares = bundler
-      .compilers
-      .filter(compiler => compiler.options.target !== 'node')
+    const hotMiddlewares = bundler.compilers
       .map(compiler => webpackHotMiddleware(compiler));
 
     let handleServerBundleComplete = () => {
@@ -88,16 +85,12 @@ async function start() {
         if (!err) {
           const bs = Browsersync.create();
           bs.init({
-            ...(DEBUG ? {} : { notify: false, ui: false }),
+            ...(DEBUG ? {} : {notify: false, ui: false}),
 
             proxy: {
               target: host,
               middleware: [wpMiddleware, ...hotMiddlewares],
             },
-
-            // no need to watch '*.js' here, webpack will take care of it for us,
-            // including full page reloads if HMR won't work
-            files: ['build/content/**/*.*'],
           }, resolve);
           handleServerBundleComplete = runServer;
         }

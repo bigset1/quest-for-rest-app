@@ -1,16 +1,6 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import path from 'path';
 import webpack from 'webpack';
 import extend from 'extend';
-import AssetsPlugin from 'assets-webpack-plugin';
 
 const DEBUG = !process.argv.includes('--release');
 const VERBOSE = process.argv.includes('--verbose');
@@ -36,12 +26,6 @@ const GLOBALS = {
 
 const config = {
   context: path.resolve(__dirname, '../src'),
-
-  output: {
-    path: path.resolve(__dirname, '../build/public/assets'),
-    publicPath: '/assets/',
-    sourcePrefix: '  ',
-  },
 
   module: {
     loaders: [
@@ -91,7 +75,7 @@ const config = {
         test: /\.scss$/,
         loaders: [
           'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({ sourceMap: DEBUG, minimize: !DEBUG })}`,
+          `css-loader?${JSON.stringify({sourceMap: DEBUG, minimize: !DEBUG})}`,
           'postcss-loader?pack=sass',
           'sass-loader',
         ],
@@ -148,7 +132,7 @@ const config = {
       default: [
         // Transfer @import rule by inlining content, e.g. @import 'normalize.css'
         // https://github.com/postcss/postcss-import
-        require('postcss-import')({ addDependencyTo: bundler }),
+        require('postcss-import')({addDependencyTo: bundler}),
         // W3C variables, e.g. :root { --color: red; } div { background: var(--color); }
         // https://github.com/postcss/postcss-custom-properties
         require('postcss-custom-properties')(),
@@ -187,10 +171,10 @@ const config = {
         require('postcss-flexbugs-fixes')(),
         // Add vendor prefixes to CSS rules using values from caniuse.com
         // https://github.com/postcss/autoprefixer
-        require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
+        require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
       ],
       sass: [
-        require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
+        require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
       ],
     };
   },
@@ -204,25 +188,18 @@ const clientConfig = extend(true, {}, config, {
   entry: './client.js',
 
   output: {
-    filename: DEBUG ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
-    chunkFilename: DEBUG ? '[name].[id].js?[chunkhash]' : '[name].[id].[chunkhash].js',
+    path: path.resolve(__dirname, '../build'),
+    chunkFilename: 'app.[name].js',
+    filename: 'app.js',
   },
 
-  target: 'web',
+  // target: 'web',
 
   plugins: [
 
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': true }),
-
-    // Emit a file with assets paths
-    // https://github.com/sporto/assets-webpack-plugin#options
-    new AssetsPlugin({
-      path: path.resolve(__dirname, '../build'),
-      filename: 'assets.js',
-      processOutput: x => `module.exports = ${JSON.stringify(x)};`,
-    }),
+    new webpack.DefinePlugin({...GLOBALS, 'process.env.BROWSER': true}),
 
     // Assign the module and chunk ids by occurrence count
     // Consistent ordering of modules required if using any hashing ([hash] or [chunkhash])
@@ -246,13 +223,13 @@ const clientConfig = extend(true, {}, config, {
 
       // A plugin for a more aggressive chunk merging strategy
       // https://webpack.github.io/docs/list-of-plugins.html#aggressivemergingplugin
-      new webpack.optimize.AggressiveMergingPlugin(),
+      //new webpack.optimize.AggressiveMergingPlugin(),
     ],
   ],
 
   // Choose a developer tool to enhance debugging
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: DEBUG ? 'source-map' : false,
+  devtool: 'source-map',
 });
 
 //
@@ -266,26 +243,16 @@ const serverConfig = extend(true, {}, config, {
     path: path.resolve(__dirname, '../build'),
     filename: 'server.js',
     chunkFilename: 'server.[name].js',
-    libraryTarget: 'commonjs2',
+    //libraryTarget: 'commonjs2',
   },
 
   target: 'node',
-
-  externals: [
-    /^\.\/assets$/,
-    /^[@a-z][a-z\/\.\-0-9]*$/i,
-  ],
 
   plugins: [
 
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-    new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': false }),
-
-    // Adds a banner to the top of each generated chunk
-    // https://webpack.github.io/docs/list-of-plugins.html#bannerplugin
-    new webpack.BannerPlugin('require("source-map-support").install();',
-      { raw: true, entryOnly: false }),
+    new webpack.DefinePlugin({...GLOBALS, 'process.env.BROWSER': false}),
   ],
 
   node: {
