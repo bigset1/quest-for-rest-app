@@ -8,15 +8,16 @@
  */
 
 import 'babel-polyfill';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import FastClick from 'fastclick';
+import FastClick from 'fastclick';
 import Router from 'react-router/lib/Router';
 import routes from './routes';
 import browserHistory  from 'react-router/lib/browserHistory';
-
+injectTapEventPlugin();
 // Make taps on links and buttons work fast on mobiles
-//FastClick.attach(document.body);
+FastClick.attach(document.body);
 
 const container = document.getElementById('app');
 

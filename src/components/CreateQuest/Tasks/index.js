@@ -16,9 +16,11 @@ export default class Tasks extends React.Component {
       finished: false,
       stepIndex: 0,
     };
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
   }
 
-  handleNext = () => {
+  handleNext() {
     const {stepIndex} = this.state;
     console.log(stepIndex);
     this.setState({
@@ -27,7 +29,7 @@ export default class Tasks extends React.Component {
     });
   };
 
-  handlePrev = () => {
+  handlePrev() {
     const {stepIndex} = this.state;
     if (stepIndex > 0) {
       this.setState({stepIndex: stepIndex - 1});
