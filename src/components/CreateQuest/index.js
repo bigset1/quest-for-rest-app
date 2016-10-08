@@ -3,6 +3,7 @@ import {Panel} from 'react-bootstrap';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
+import Tasks from './Tasks';
 
 export default class CreateQuest extends React.Component {
   onSubmit(e) {
@@ -18,6 +19,8 @@ export default class CreateQuest extends React.Component {
           <Divider />
           <TextField hintText="Description"
                      multiLine={true} rows={2} rowsMax={10}/>
+          <Divider />
+          <Tasks/>
           <Divider />
           <RaisedButton label="Primary" primary={true} type="submit"/>
         </form>
