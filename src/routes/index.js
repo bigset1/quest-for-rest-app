@@ -5,10 +5,12 @@ import IndexRoute from 'react-router/lib/IndexRoute';
 
 import Home from '../components/Home';
 import Profile from '../components/Profile';
+import CreateQuest from '../components/CreateQuest';
 import App from '../components/App';
 
 
 export default (<Route path="/" component={App}>
   <IndexRoute component={Home}/>
   <Route path={"profile"} component={Profile}/>
+  <Route path={"create-quest"} component={CreateQuest}/>
 </Route>)

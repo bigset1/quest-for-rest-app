@@ -15,6 +15,7 @@ export default ()=> {
     <head>
       <meta charSet="utf-8"/>
       <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
+      
       <title>Quest for rest</title>
       <meta name="description" content="quest for rest"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>

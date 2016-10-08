@@ -6,6 +6,7 @@ function Navigation({className}) {
   return (
     <Nav bsStyle="pills" activeKey={1} onSelect={handleSelect}>
       <Link to={"/profile"}>Profile</Link>
+      <Link to={"/create-quest"}>CreateQuest</Link>
     </Nav>
   );
 }

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import {Panel} from 'react-bootstrap';
+import HomeItem from './HomeItem/HomeItem';
 
 export default class Home extends React.Component {
   render() {
-    return <Panel>
-      Test Home page
-    </Panel>
+    return(
+      <div>
+        <HomeItem/>
+       </div>
+     )
   }
 }
