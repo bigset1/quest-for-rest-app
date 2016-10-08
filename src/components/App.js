@@ -1,8 +1,9 @@
 import React, {PropTypes} from 'react';
-
+import './main.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './Header';
 import Footer from './Footer';
+import Container from './Container';
 
 const ContextType = {
   // Enables critical path CSS rendering
@@ -27,7 +28,9 @@ class App extends React.Component {
     return <MuiThemeProvider>
       <div>
         <Header/>
-        {this.props.children}
+        <Container>
+          {this.props.children}
+        </Container>
         <Footer/>
       </div>
     </MuiThemeProvider>;
