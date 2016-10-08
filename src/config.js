@@ -3,6 +3,8 @@
 export const port = process.env.PORT || 3000;
 export const host = process.env.WEBSITE_HOSTNAME || `localhost:${port}`;
 
+export const restUrl = 'http://192.168.2.110:8080';
+
 export const auth = {
 
   jwt: {secret: 'React Starter Kit'},
