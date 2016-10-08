@@ -27,7 +27,7 @@ const styles = {
 const tilesData = [
   {
     img: 'http://placekitten.com/g/1000/200',
-    title: 'Breakfast',
+    title: 'Pirka',
     author: 'jill111',
     featured: true
   }
@@ -56,7 +56,7 @@ export default class Profile extends React.Component {
               >
               <img src={tile.img} />
 
-              <Avatar style={styles.avatarImg} size="200" src = "http://placekitten.com/g/200/200"/>
+              <Avatar style={styles.avatarImg} size={200} src = "http://placekitten.com/g/200/200"/>
               <Statistic/>
             </GridTile>
           ))}

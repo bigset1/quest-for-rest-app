@@ -22,7 +22,7 @@ export default class Statistic extends React.Component{
   render(){
     return(
       <div>
-        lOL
+
       </div>
     )
   }
