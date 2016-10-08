@@ -4,7 +4,7 @@ import Link from 'react-router/lib/Link';
 
 function Navigation({className}) {
   return (
-    <Nav bsStyle="pills" activeKey={1} onSelect={handleSelect}>
+    <Nav bsStyle="pills" activeKey={1}>
       <Link to={"/profile"}>Profile</Link>
     </Nav>
   );

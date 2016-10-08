@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import extend from 'extend';
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const DEBUG = !process.argv.includes('--release');
 const VERBOSE = process.argv.includes('--verbose');
@@ -58,27 +59,11 @@ const config = {
       },
       {
         test: /\.css/,
-        loaders: [
-          'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: DEBUG,
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: DEBUG ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
-            minimize: !DEBUG,
-          })}`,
-          'postcss-loader?pack=default',
-        ],
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
       },
       {
         test: /\.scss$/,
-        loaders: [
-          'isomorphic-style-loader',
-          `css-loader?${JSON.stringify({sourceMap: DEBUG, minimize: !DEBUG})}`,
-          'postcss-loader?pack=sass',
-          'sass-loader',
-        ],
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!resolve-url!sass-loader?sourceMap&includePaths[]=' + path.resolve(__dirname, '../src/'))
       },
       {
         test: /\.json$/,
@@ -225,6 +210,7 @@ const clientConfig = extend(true, {}, config, {
       // https://webpack.github.io/docs/list-of-plugins.html#aggressivemergingplugin
       //new webpack.optimize.AggressiveMergingPlugin(),
     ],
+    new ExtractTextPlugin("public/styles.css")
   ],
 
   // Choose a developer tool to enhance debugging
@@ -253,6 +239,7 @@ const serverConfig = extend(true, {}, config, {
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
     new webpack.DefinePlugin({...GLOBALS, 'process.env.BROWSER': false}),
+    new ExtractTextPlugin( "public/styles.css" )
   ],
 
   node: {

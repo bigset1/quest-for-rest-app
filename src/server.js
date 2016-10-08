@@ -52,12 +52,7 @@ pe.skipPackage('express');
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.log(pe.render(err)); // eslint-disable-line no-console
   const html = ReactDOM.renderToStaticMarkup(
-    <Html
-      title="Internal Server Error"
-      description={err.message}
-    >
-    {ReactDOM.renderToString(<ErrorPageWithoutStyle error={err}/>)}
-    </Html>
+    <Html/> 
   );
   res.status(err.status || 500);
   res.send(`<!doctype html>${html}`);
