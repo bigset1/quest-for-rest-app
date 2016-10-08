@@ -22,6 +22,7 @@ class Header extends React.Component {
 
   render() {
     const links = [
+      <Link to="/" key="home"><FlatButton label="Home"/></Link>,
       <Link to="/create-quest" key="create"><FlatButton label="Create quest"/></Link>,
     ];
     const avatarComponent = <Link to="/profile">

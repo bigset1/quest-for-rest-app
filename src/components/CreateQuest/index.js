@@ -17,12 +17,10 @@ export default class CreateQuest extends React.Component {
         <form onSubmit={this.onSubmit.bind(this)}>
           <TextField hintText="Quest name"/>
           <Divider />
-          <TextField hintText="Description"
-                     multiLine={true} rows={2} rowsMax={10}/>
+          <TextField hintText="Description" multiLine={true} rows={2} rowsMax={10}/>
           <Divider />
           <Tasks/>
           <Divider />
-          <RaisedButton label="Primary" primary={true} type="submit"/>
         </form>
       </Panel>
     )
