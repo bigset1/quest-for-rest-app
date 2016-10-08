@@ -42,8 +42,8 @@ export default class Profile extends React.Component {
           cellHeight={200}
           padding={1}
           style={styles.gridList}
-          >
-          {tilesData.map((tile) => (
+            >
+            {tilesData.map((tile) => (
             <GridTile
               key={tile.img}
               title={tile.title}
