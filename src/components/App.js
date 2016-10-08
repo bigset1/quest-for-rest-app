@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import './main.css';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -25,11 +24,13 @@ class App extends React.Component {
   }
 
   render() {
-    return <div>
-      <Header/>
-      {this.props.children}
-      <Footer/>
-    </div>
+    return <MuiThemeProvider>
+      <div>
+        <Header/>
+        {this.props.children}
+        <Footer/>
+      </div>
+    </MuiThemeProvider>;
   }
 
 }

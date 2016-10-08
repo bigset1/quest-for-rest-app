@@ -1,12 +1,26 @@
 import React from 'react';
 import {Panel} from 'react-bootstrap';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
+import RaisedButton from 'material-ui/RaisedButton';
 
+export default class CreateQuest extends React.Component {
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(e)
+  }
 
-export default class CreateQuest extends React.Component{
-  render(){
-    return(
+  render() {
+    return (
       <Panel>
-        This is page for creating quest
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <TextField hintText="Quest name"/>
+          <Divider />
+          <TextField hintText="Description"
+                     multiLine={true} rows={2} rowsMax={10}/>
+          <Divider />
+          <RaisedButton label="Primary" primary={true} type="submit"/>
+        </form>
       </Panel>
     )
   }
