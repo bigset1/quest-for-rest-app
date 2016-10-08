@@ -15,13 +15,13 @@ export default ()=> {
     <head>
       <meta charSet="utf-8"/>
       <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
-      
+
       <title>Quest for rest</title>
       <meta name="description" content="quest for rest"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-      <link rel="stylesheet" href="css/bootstrap.css"/>
-      <link rel="stylesheet" href="css/bootstrap-theme.css"/>
+      <link rel="stylesheet" href="styles.css"/>
+
     </head>
     <body>
     <div id="app"/>

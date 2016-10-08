@@ -1,13 +1,16 @@
 import React, {PropTypes} from 'react';
-import {Nav} from 'react-bootstrap';
 import Link from 'react-router/lib/Link';
 
 function Navigation({className}) {
   return (
-    <Nav bsStyle="pills" activeKey={1} onSelect={handleSelect}>
-      <Link to={"/profile"}>Profile</Link>
-      <Link to={"/create-quest"}>CreateQuest</Link>
-    </Nav>
+    <ul className="nav nav-pills">
+      <li>
+        <Link to={"/profile"}> Profile </Link>
+      </li>
+      <li>
+        <Link to={"/create-quest"}> CreateQuest </Link>
+      </li>
+    </ul>
   );
 }
 
@@ -15,4 +18,4 @@ Navigation.propTypes = {
   className: PropTypes.string,
 };
 
-export default withStyles(s)(Navigation);
+export default Navigation;
