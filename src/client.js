@@ -12,8 +12,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import FastClick from 'fastclick';
 import Router from 'react-router/lib/Router';
-import browserHistory  from 'react-router/lib/browserHistory';
 import routes from './routes';
+import browserHistory  from 'react-router/lib/browserHistory';
 
 // Make taps on links and buttons work fast on mobiles
 //FastClick.attach(document.body);

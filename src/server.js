@@ -7,7 +7,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
 import Html from './components/Html';
-import {ErrorPageWithoutStyle} from './routes/error/ErrorPage';
+import Router from 'react-router/lib/Router';
+import routes from './routes';
+import browserHistory  from 'react-router/lib/browserHistory';
+
 import {port} from './config';
 
 const app = express();
@@ -33,7 +36,9 @@ app.use(bodyParser.json());
 // -----------------------------------------------------------------------------
 app.get('*', async(req, res, next) => {
   try {
-    const html = ReactDOM.renderToStaticMarkup(<Html />);
+    const html = ReactDOM.renderToStaticMarkup(<Html >
+    <Router history={browserHistory}>{routes}</Router>
+    </Html>);
 
     res.status(200);
     res.send(`<!doctype html>${html}`);
@@ -52,7 +57,9 @@ pe.skipPackage('express');
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.log(pe.render(err)); // eslint-disable-line no-console
   const html = ReactDOM.renderToStaticMarkup(
-    <Html/> 
+    <Html>
+    <Router history={browserHistory}>{routes}</Router>
+    </Html>
   );
   res.status(err.status || 500);
   res.send(`<!doctype html>${html}`);
