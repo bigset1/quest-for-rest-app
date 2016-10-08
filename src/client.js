@@ -1,12 +1,4 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
+/** global VK */
 import 'babel-polyfill';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React from 'react';
@@ -15,14 +7,22 @@ import FastClick from 'fastclick';
 import Router from 'react-router/lib/Router';
 import routes from './routes';
 import browserHistory  from 'react-router/lib/browserHistory';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import questsApp from './core/reducers';
+
 injectTapEventPlugin();
 // Make taps on links and buttons work fast on mobiles
 FastClick.attach(document.body);
 
 const container = document.getElementById('app');
+let store = createStore(questsApp);
 
 try {
-  ReactDOM.render(<Router history={browserHistory}>{routes}</Router>, container);
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router history={browserHistory}>{routes}</Router>
+    </Provider>, container);
   //ReactDOM.render(<div>test app</div>, container);
 } catch (err) {
   if (process.env.NODE_ENV !== 'production') {

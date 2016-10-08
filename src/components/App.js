@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './Header';
 import Footer from './Footer';
 import Container from './Container';
+import { connect } from 'react-redux';
 
 const ContextType = {
   // Enables critical path CSS rendering
@@ -14,7 +15,6 @@ const ContextType = {
 class App extends React.Component {
 
   static propTypes = {
-    //context: PropTypes.shape(ContextType).isRequired,
     children: PropTypes.element.isRequired,
   };
 
@@ -35,7 +35,15 @@ class App extends React.Component {
       </div>
     </MuiThemeProvider>;
   }
-
 }
+/*
+const mapStateToProps = (state) => {
+  return {
+    profile: getVisibleTodos(state.profile, state.visibilityFilter)
+  }
+}*/
 
-export default App;
+export default connect(
+  //mapStateToProps,
+  //mapDispatchToProps
+)(App);

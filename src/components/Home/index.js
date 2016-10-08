@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-
+import {connect} from 'react-redux';
+import {fetchQuests} from '../../core/actions';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -30,15 +31,22 @@ const QuestCard = ()=> {
         Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
         Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
       </CardText>
-      <CardActions>
-        <FlatButton label="Action1"/>
-        <FlatButton label="Action2"/>
-      </CardActions>
     </Card>
   </Paper>
 }
+/*
 
-export default class Home extends React.Component {
+ <CardActions>
+ <FlatButton label="Action1"/>
+ <FlatButton label="Action2"/>
+ </CardActions>
+ */
+
+class Home extends React.Component {
+  componentDidMount() {
+    let {dispatch} =this.props;
+    //dispatch(fetchQuests());
+  }
 
   render() {
     return (
@@ -50,3 +58,5 @@ export default class Home extends React.Component {
     )
   }
 }
+
+export default connect()(Home)

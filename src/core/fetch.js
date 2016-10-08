@@ -1,6 +1,8 @@
-import superAgent from 'superagent';
-import superAgentPrefix from 'superagent-prefix';
+import superAgent from 'superagent/lib/client';
 import {restUrl} from '../config';
 
-superAgent.use(superAgentPrefix(restUrl));
-
+export default {
+  get: (url, ...options)=>superAgent.get(`${restUrl}${url}`, ...options),
+  post: (url, ...options)=>superAgent.post(`${restUrl}${url}`, ...options),
+  put: (url, ...options)=>superAgent.put(`${restUrl}${url}`, ...options),
+};

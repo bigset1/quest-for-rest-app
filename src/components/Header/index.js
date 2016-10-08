@@ -5,7 +5,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Link from 'react-router/lib/Link';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
-const style = {height:'50px'};
+import {vkAuth} from '../../config';
+const style = {height: '50px'};
 
 class Header extends React.Component {
   constructor() {
@@ -19,6 +20,11 @@ class Header extends React.Component {
   toggleMenu(open) {
     this.setState({open})
   }
+
+  login() {
+    window.location.replace(vkAuth(window.location.href));
+  }
+
 
   render() {
     const links = [
@@ -35,7 +41,7 @@ class Header extends React.Component {
       <Drawer docked={false} width={250}
               open={this.state.open}
               onRequestChange={this.toggleMenu}>
-        <MenuItem>Menu Item</MenuItem>
+        <MenuItem onTouchTap={this.login}>Menu Item</MenuItem>
         <MenuItem>Menu Item 2</MenuItem>
       </Drawer>
     </div>
