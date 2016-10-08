@@ -1,44 +1,36 @@
 import React from 'react';
 
-import {Panel, Grid, Row, Col, Button, Thumbnail} from 'react-bootstrap';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 export default class Home extends React.Component {
   render() {
-    return <Panel>
-      <Grid>
-        <Row>
-          <Col md={6}>
-            <Thumbnail src="http://placekitten.com/242/200" alt="242x200">
-              <h3>Thumbnail label</h3>
-              <p>Description</p>
-              <p>
-                <Button bsStyle="primary">Button</Button>&nbsp;
-                <Button bsStyle="default">Button</Button>
-              </p>
-            </Thumbnail>
-          </Col>
-          <Col md={6}>
-            <Thumbnail src="http://placekitten.com/242/200" alt="242x200">
-              <h3>Thumbnail label</h3>
-              <p>Description</p>
-              <p>
-                <Button bsStyle="primary">Button</Button>&nbsp;
-                <Button bsStyle="default">Button</Button>
-              </p>
-            </Thumbnail>
-          </Col>
-          <Col md={6}>
-            <Thumbnail src="http://placekitten.com/242/200" alt="242x200">
-              <h3>Thumbnail label</h3>
-              <p>Description</p>
-              <p>
-                <Button bsStyle="primary">Button</Button>&nbsp;
-                <Button bsStyle="default">Button</Button>
-              </p>
-            </Thumbnail>
-          </Col>
-        </Row>
-      </Grid>
-    </Panel>
+    return(
+      <div>
+        <Card>
+          <CardHeader
+            title="URL Avatar"
+            subtitle="Subtitle"
+            avatar="images/jsa-128.jpg"
+            />
+          <CardMedia
+            overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+            >
+            <img src="images/nature-600-337.jpg" />
+          </CardMedia>
+          <CardTitle title="Card title" subtitle="Card subtitle" />
+          <CardText>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
+            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+          </CardText>
+          <CardActions>
+            <FlatButton label="Action1" />
+            <FlatButton label="Action2" />
+          </CardActions>
+        </Card>
+      </div>
+    )
   }
 }

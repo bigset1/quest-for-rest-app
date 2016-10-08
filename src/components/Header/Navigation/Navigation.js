@@ -5,6 +5,9 @@ function Navigation({className}) {
   return (
     <ul className="nav nav-pills">
       <li>
+        <Link to={"/"}> Home </Link>
+      </li>
+      <li>
         <Link to={"/profile"}> Profile </Link>
       </li>
       <li>

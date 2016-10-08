@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import './main.css';
 import Header from './Header';
+import Footer from './Footer';
 
 const ContextType = {
   // Enables critical path CSS rendering
@@ -26,6 +28,7 @@ class App extends React.Component {
     return <div>
       <Header/>
       {this.props.children}
+      <Footer/>
     </div>
   }
 
