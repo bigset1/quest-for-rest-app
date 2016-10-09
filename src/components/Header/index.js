@@ -21,11 +21,6 @@ class Header extends React.Component {
     this.setState({open})
   }
 
-  login() {
-    window.location.replace(vkAuth(window.location.href));
-  }
-
-
   render() {
     const links = [
       <Link to="/" key="home"><FlatButton label="Home"/></Link>,
@@ -41,8 +36,9 @@ class Header extends React.Component {
       <Drawer docked={false} width={250}
               open={this.state.open}
               onRequestChange={this.toggleMenu}>
-        <MenuItem onTouchTap={this.login}>Menu Item</MenuItem>
-        <MenuItem>Menu Item 2</MenuItem>
+        <MenuItem>
+          <Link to="/auth/login" key="home">Login</Link>,
+        </MenuItem>
       </Drawer>
     </div>
   }

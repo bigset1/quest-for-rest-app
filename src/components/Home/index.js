@@ -19,17 +19,14 @@ const paper = {
 
 const staticList = [1, 2, 3, 4, 5, 6];
 
-const QuestCard = ()=> {
+const QuestCard = ({quest})=> {
   return <Paper style={paper}>
     <Card style={style}>
-      <CardMedia overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle"/>}>
-        <img src="http://placekitten.com/400/200"/>
+      <CardMedia overlay={<CardTitle title={quest.name}/>}>
+        <img src={quest.pictureUrl}/>
       </CardMedia>
       <CardText>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-        Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-        Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+        {quest.description}
       </CardText>
     </Card>
   </Paper>
@@ -49,14 +46,22 @@ class Home extends React.Component {
   }
 
   render() {
+    let {list} = this.props;
     return (
       <div>
-        {staticList.map((g, i)=> {
-          return <QuestCard key={i}/>
+        {list.map((g, i)=> {
+          return <QuestCard key={i} queest={g}/>
         })}
       </div>
     )
   }
 }
 
-export default connect()(Home)
+
+const mapStateToProps = (state) => {
+  //debugger;
+  return {list: state.quests}
+}
+
+
+export default connect(mapStateToProps)(Home)

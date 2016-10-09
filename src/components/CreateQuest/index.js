@@ -6,6 +6,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Tasks from './Tasks';
 
 export default class CreateQuest extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      tasks: []
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
     console.log(e)
@@ -19,7 +26,7 @@ export default class CreateQuest extends React.Component {
           <Divider />
           <TextField hintText="Description" multiLine={true} rows={2} rowsMax={10}/>
           <Divider />
-          <Tasks/>
+          <Tasks tasks={this.state.tasks}/>
           <Divider />
         </form>
       </Panel>

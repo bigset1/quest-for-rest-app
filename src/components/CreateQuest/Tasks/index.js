@@ -115,7 +115,7 @@ export default class Tasks extends React.Component {
   render() {
     const {steps, stepIndex} = this.state;
 
-    return <Stepper activeStep={stepIndex} orientation="vertical" linear={false}>
+    return <Stepper activeStep={stepIndex} orientation="vertical" linear={false} style={{marginBottom: '10px'}}>
       {steps.map((step, index)=> {
         return <TaskStep key={index} step={step} activate={this.activateStep}/>
       })}

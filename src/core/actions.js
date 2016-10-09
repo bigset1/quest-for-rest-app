@@ -1,16 +1,18 @@
 import constants from './constants';
 import {quests, auth} from './api';
+import {jwt} from '../config';
 
 export const fetchQuests = ()=> {
   return dispatch=> {
-    quests.all()
+    return quests.all()
       .then(response=> {
         dispatch({
           type: constants.FETCH_QUESTS,
-          payload: response
+          payload: response.body
         })
       })
       .catch(result=> {
+        console.log(result);
         dispatch({
           type: constants.FETCH_QUESTS_ERROR,
           error: result
@@ -19,14 +21,35 @@ export const fetchQuests = ()=> {
   }
 };
 
-export const login = (login, password)=> {
+export const login = (type, ...otherProps)=> {
   return dispatch=> {
-    auth.login(login, password).then(response=> {
-      dispatch({
-        type: constants.AUTH_LOGIN_SUCCESS,
-        payload: response
-      })
-    })
+    switch (type) {
+      case 'vk':
+        return auth.loginVK(...otherProps).then(({body})=> {
+          jwt.set(body.token);
+
+          dispatch({
+            type: constants.AUTH_LOGIN_SUCCESS,
+            payload: body
+          })
+        }).catch(result=> {
+          console.log(result);
+        });
+        break;
+      default:
+        return auth.login(...otherProps).then(({body})=> {
+          jwt.set(body.token);
+
+          dispatch({
+            type: constants.AUTH_LOGIN_SUCCESS,
+            payload: body
+          })
+        }).catch(result=> {
+          console.log(result);
+        });
+        break;
+    }
+
   }
 }
 

@@ -1,5 +1,6 @@
 /** global VK */
 import 'babel-polyfill';
+require('./public/qrcodejs/qrcode');
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,6 +12,9 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import questsApp from './core/reducers';
+import {jwt} from './config';
+
+jwt.checkStorage();
 injectTapEventPlugin();
 // Make taps on links and buttons work fast on mobiles
 FastClick.attach(document.body);
