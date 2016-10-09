@@ -1,6 +1,5 @@
 /** global VK */
 import 'babel-polyfill';
-require('./public/qrcodejs/qrcode');
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React from 'react';
 import ReactDOM from 'react-dom';

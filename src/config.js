@@ -16,7 +16,7 @@ export const jwt = {
 export const port = process.env.PORT || 3000;
 export const host = process.env.WEBSITE_HOSTNAME || `localhost:${port}`;
 
-export const restUrl = 'http://192.168.43.166:8080';
+export const restUrl = 'http://192.168.43.85:8080';
 const VK_API_VERSION = '5.57',
   VK_CLIENT_ID = '5660286';
 

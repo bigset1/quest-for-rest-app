@@ -48,7 +48,7 @@ export default connect()(class extends React.Component {
     return <form onSubmit={this.submit} style={style}>
       <TextField style={input} value={login} onChange={this.changeHandler.bind(this, 'login')}
                  floatingLabelText="Login"/>
-      <TextField style={input} value={password} onChange={this.changeHandler.bind(this, 'password')}
+      <TextField type="password" style={input} value={password} onChange={this.changeHandler.bind(this, 'password')}
                  floatingLabelText="Password"/>
       <RaisedButton primary style={input} type="submit">LOGIN</RaisedButton>
       <Divider style={{margin: '10px 0'}}/>
