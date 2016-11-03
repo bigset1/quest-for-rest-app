@@ -15,11 +15,12 @@ import {
   StepButton,
 } from 'material-ui/Stepper';
 
+const _title = (index, type) =>(`Task ${index + 1} (${type})`);
+
 class TaskStep extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: '',
       description: '',
       type: types.text
     }
@@ -31,7 +32,10 @@ class TaskStep extends React.Component {
     })
   }
 
-  handleChange = (event, index, type) => this.setState({type});
+  handleChange = (event, index, type) => {
+    event.stopPropagation();
+    this.setState({type});
+  }
 
   render() {
     let {title, description, type} = this.state;
@@ -39,15 +43,15 @@ class TaskStep extends React.Component {
     let Component = TaskComponent(type);
     return <Step {...otherProps}>
       <StepButton onTouchTap={() => activate(otherProps.index)}>
-        {title || "Unnamed task"}
+        {_title(otherProps.index, type)}
       </StepButton>
       <StepContent>
-        <TextField floatingLabelText="Task name" value={title} onChange={this.changeHandler.bind(this, 'title')}/>
         <SelectField value={type} onChange={this.handleChange}>
           {Object.entries(types).map(([key,value])=> {
             return <MenuItem key={key} value={value} primaryText={getTitle(value)}/>
           })}
         </SelectField>
+        <TextField hintText="Task description" multiLine={true} fullWidth={true} width={600} rows={2} rowsMax={10}/>
         <Divider/>
         <Component/>
       </StepContent>
@@ -63,62 +67,41 @@ export default class Tasks extends React.Component {
       steps: [{}, {}, {}],
       stepIndex: 0,
     };
-    this.handleNext = this.handleNext.bind(this);
-    this.handlePrev = this.handlePrev.bind(this);
     this.activateStep = this.activateStep.bind(this);
   }
 
-  handleNext() {
-    const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-    });
-  };
+  activateStep(stepIndex) {
+    if (this.state.stepIndex == stepIndex)
+      stepIndex = null;
 
-  handlePrev() {
-    const {stepIndex} = this.state;
-    if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
-    }
-  };
-
-  renderStepActions(step) {
-    const {stepIndex} = this.state;
-
-    return (
-      <div style={{margin: '12px 0'}}>
-        <RaisedButton
-          label={stepIndex === 2 ? 'Finish' : 'Next'}
-          disableTouchRipple={true}
-          disableFocusRipple={true}
-          primary={true}
-          onTouchTap={this.handleNext}
-          style={{marginRight: 12}}
-        />
-        {step > 0 && (
-          <FlatButton
-            label="Back"
-            disabled={stepIndex === 0}
-            disableTouchRipple={true}
-            disableFocusRipple={true}
-            onTouchTap={this.handlePrev}
-          />
-        )}
-      </div>
-    );
+    this.setState({stepIndex})
   }
 
-  activateStep(stepIndex) {
-    this.setState({stepIndex})
+  createStep() {
+    this.setState({
+      steps: [...this.state.steps, {}],
+      stepIndex: this.state.steps.length
+    });
   }
 
   render() {
     const {steps, stepIndex} = this.state;
 
-    return <Stepper activeStep={stepIndex} orientation="vertical" linear={false} style={{marginBottom: '10px'}}>
-      {steps.map((step, index)=> {
-        return <TaskStep key={index} step={step} activate={this.activateStep}/>
-      })}
-    </Stepper>
+    return <div>
+      <Stepper activeStep={stepIndex} orientation="vertical" linear={false} style={{marginBottom: '10px'}}>
+        {steps.map((step, index)=> {
+          return <TaskStep key={index} step={step} activate={this.activateStep}/>
+        })}
+        <Step>
+          <StepButton onTouchTap={this.createStep.bind(this)}>
+            {"Add more task"}
+          </StepButton>
+        </Step>
+      </Stepper>
+      <RaisedButton label={"Create quest"} primary={true}
+                    onTouchTap={this.handleNext}
+                    style={{marginRight: 12}}
+      />
+    </div>
   }
 }

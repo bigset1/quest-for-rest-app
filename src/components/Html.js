@@ -21,8 +21,8 @@ export default ()=> {
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
       <link rel="stylesheet" href="/styles.css"/>
-      <script >
-        </script>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     </head>
     <body>
     <div id="app"/>

@@ -9,12 +9,17 @@ import CreateQuest from '../components/CreateQuest';
 import App from '../components/App';
 import Login from '../components/Auth/Login';
 import Redirect from '../components/Auth/Redirect';
+import QuestView from '../components/Home/QuestView';
+import QuestsAll from '../components/Home/QuestsAll';
 
 export default (<Route path="/" component={App}>
-  <IndexRoute component={Home}/>
+  <Route component={Home}>
+    <IndexRoute component={QuestsAll}/>
+    <Route path="quest/:id" component={QuestView}/>
+  </Route>
   <Route path={"auth"}>
     <Route path={"login"} component={Login}/>
-    <Route path={"redirect"} component={Redirect} />
+    <Route path={"redirect"} component={Redirect}/>
   </Route>
   <Route path={"profile"} component={Profile}/>
   <Route path={"create-quest"} component={CreateQuest}/>

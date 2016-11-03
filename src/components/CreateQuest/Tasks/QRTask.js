@@ -33,7 +33,6 @@ export default class extends React.Component {
     let img = qr.createImgTag(5);    // creates an <img> tag as text
 
     return (<div>
-      <TextField hintText="Task description" multiLine={true} rows={2} rowsMax={10}/>
       <TextField hintText="Question result" value={this.state.text} onChange={this.onChange}/>
       <div id="qrcode" dangerouslySetInnerHTML={{__html: img}}/>
     </div>)

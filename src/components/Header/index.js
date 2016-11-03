@@ -37,7 +37,10 @@ class Header extends React.Component {
               open={this.state.open}
               onRequestChange={this.toggleMenu}>
         <MenuItem>
-          <Link to="/auth/login" key="home">Login</Link>,
+          <Link to="/auth/login" key="login">Login</Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to="/auth/register" key="register">Register</Link>
         </MenuItem>
       </Drawer>
     </div>
